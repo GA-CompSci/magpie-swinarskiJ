@@ -212,7 +212,7 @@ private int findKeyword(String statement, String goal)
 
 	private String getRandomResponse()
 	{
-		final int NUMBER_OF_RESPONSES = 6;
+		final int NUMBER_OF_RESPONSES = 7;
 		double r = Math.random();
 		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
 		String response = "";
@@ -240,6 +240,10 @@ private int findKeyword(String statement, String goal)
 		else if (whichResponse == 5)
 		{
 			response = "Care to explain?";
+		}
+		else if (whichResponse == 6)
+		{
+			response = "Are you sure?";
 		}
 		
 		return response;
