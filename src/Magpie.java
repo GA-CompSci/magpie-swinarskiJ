@@ -118,7 +118,12 @@ private int findKeyword(String statement, String goal)
 
         }
 
-
+		else if (findKeyword(statement,"Hi") >= 0
+				|| findKeyword(statement,"Hello") >= 0
+				|| findKeyword(statement,"Hey") >= 0)
+		{
+			response = "Hi!";
+		}
 
         //NEGATIVE
 		else if (findKeyword(statement,"no") >= 0)
@@ -145,11 +150,26 @@ private int findKeyword(String statement, String goal)
 		}
 
         //MR. A
-        else if(findKeyword(statement,"Adilleta") != -1
+        else if(findKeyword(statement,"Adiletta") != -1
             ||findKeyword(statement,"Mr. A") != -1)
         {
-            response = "What a great guy.";
+            response = "What a great guy!";
         }
+
+		//I [SOMETHING] YOU
+		else if (findKeyword(statement, "I")>= 0
+			&& findKeyword(statement, "you") >=0
+			&& findKeyword(statement, "you") > findKeyword(statement, "I"))
+		{
+			// Find the in-between
+			int posI = findKeyword(statement,"I");
+			int posU = findKeyword(statement,"you");
+
+			String something = statement.substring(posI + 1, posU).trim();
+			
+			response = "Why do you " + something + " me?";
+		}
+
 
 		//I LIKE SOMETHING
 		else if (findKeyword(statement, "I like") >= 0)
@@ -186,12 +206,13 @@ private int findKeyword(String statement, String goal)
 	}
 	
 	/**
-	 * Pick a default response to use if nothing else fits.
+	 * Pick random response if nothing else fits.
 	 * @return a non-committal string
 	 */
+
 	private String getRandomResponse()
 	{
-		final int NUMBER_OF_RESPONSES = 4;
+		final int NUMBER_OF_RESPONSES = 6;
 		double r = Math.random();
 		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
 		String response = "";
@@ -211,6 +232,14 @@ private int findKeyword(String statement, String goal)
 		else if (whichResponse == 3)
 		{
 			response = "You don't say.";
+		}
+		else if (whichResponse == 4)
+		{
+			response = "Ok. Tell me more.";
+		}
+		else if (whichResponse == 5)
+		{
+			response = "Care to explain?";
 		}
 		
 		return response;
